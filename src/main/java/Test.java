@@ -43,10 +43,11 @@ public class Test {
         public void handle(HttpExchange t) throws IOException {
             System.out.println("Path: " + t.getHttpContext().getPath());
             Method methodToExecute = routes.get(t.getHttpContext().getPath());
+            String crud = t.getRequestMethod();
 
             String response = null;
             try {
-                response = (String)methodToExecute.invoke(new Routes());
+                response = (String)methodToExecute.invoke(new Routes(), crud );
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
